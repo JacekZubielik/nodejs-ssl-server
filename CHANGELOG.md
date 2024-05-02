@@ -5,6 +5,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog],
 and this project adheres to [Semantic Versioning].
 
+
+## [0.0.6] - 2024-05-03
+
+### Fixed
+
+- on release push branches OFF
+
+
 ## [0.0.5] - 2024-05-03
 
 ### Fixed

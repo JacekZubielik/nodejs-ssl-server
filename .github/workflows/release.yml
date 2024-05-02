@@ -5,8 +5,8 @@ on:
   # release:
   #   types: [created]
   push:
-    branches:
-      - main
+    # branches:
+    #   - main
     tags:
       - v[0-9]+.*
     paths-ignore:
@@ -50,6 +50,5 @@ jobs:
           changelog: CHANGELOG.md
           token: ${{ secrets.GITHUB_TOKEN }}
           draft: false
-          title: $version
+          title: $version, $tag
           branch: main
-          #tag: $tag

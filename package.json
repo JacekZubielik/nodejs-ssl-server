@@ -1,6 +1,6 @@
 {
   "name": "nodejs-ssl-server",
-  "version": "1.0.4",
+  "version": "1.0.6",
   "description": "Show you how to deploy nodejs server on AWS EC2 Ubuntu server with Free SSL and Nginx",
   "main": "app.js",
   "scripts": {

@@ -1,3 +1,7 @@
+## 1.0.12
+
+- Add support for creating GitHub Releases.
+
 ## 1.0.11
 
 - Add support for creating GitHub Releases.

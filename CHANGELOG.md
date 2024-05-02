@@ -9,6 +9,24 @@ and this project adheres to [Semantic Versioning].
 
 - /
 
+# Changelog
+
+All notable changes to this project will be documented in this file.
+
+The format is based on [Keep a Changelog],
+and this project adheres to [Semantic Versioning].
+
+## [Unreleased]
+
+- /
+
+## [0.0.4] - 2024-05-03
+
+### Fixed
+
+- Setup Node: 16
+
+
 ## [0.0.3] - 2024-05-02
 
 ### Changed

@@ -22,10 +22,10 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
-    - name: Setup Node 16-latest
+    - name: Setup Node 16
       uses: actions/setup-node@v4
       with:
-        node-version: 16-latest
+        node-version: 16
         cache: 'npm'
     - name: Install dependencies
       run: |

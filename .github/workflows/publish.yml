@@ -6,9 +6,11 @@ on:
       - main
     paths-ignore:
       - '**.md'
+      - 'lint.yml'
   pull_request:
     paths-ignore:
       - '**.md'
+      - 'lint.yml'
   workflow_dispatch:
 
 jobs:

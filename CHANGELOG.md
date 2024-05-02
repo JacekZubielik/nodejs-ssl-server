@@ -32,15 +32,12 @@ and this project adheres to [Semantic Versioning].
 
 - Add support for creating GitHub Releases.
 
-### Changed
-
-### Deprecated
-
-### Removed
 
 ### Fixed
 
-### Security
+- node-version: 20
+  Error: Dependencies lock file is not found in /home/runner/work/nodejs-ssl-server/nodejs-ssl-server. 
+  Supported file patterns: package-lock.json,npm-shrinkwrap.json,yarn.lock
 
 ## [0.0.1] - 2024-05-02
 

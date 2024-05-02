@@ -1,1 +1,1 @@
-[![GitHub Super-Linter](https://github.com/JacekZubielik/nodejs-ssl-server/workflows/Lint%20Code%20Base/badge.svg)](https://github.com/marketplace/actions/super-linter)
+[![Lint](https://github.com/JacekZubielik/nodejs-ssl-server/actions/workflows/lint.yml/badge.svg?branch=main&event=status)](https://github.com/JacekZubielik/nodejs-ssl-server/actions/workflows/lint.yml)

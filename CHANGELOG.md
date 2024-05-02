@@ -20,6 +20,14 @@ and this project adheres to [Semantic Versioning].
 
 - /
 
+## [0.0.5] - 2024-05-03
+
+### Fixed
+
+- node 20
+- npm cache ON
+- job create-release needs job build
+
 ## [0.0.4] - 2024-05-03
 
 ### Fixed

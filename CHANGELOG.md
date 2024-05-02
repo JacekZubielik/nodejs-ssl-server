@@ -11,27 +11,15 @@ and this project adheres to [Semantic Versioning].
 
 ## [0.0.3] - 2024-05-02
 
-### Added
-
-- 
-
 ### Changed
 
-### Deprecated
-
-### Removed
-
-### Fixed
-
-### Security
-
+- Setup Node: 16-latest
 
 ## [0.0.2] - 2024-05-02
 
 ### Added
 
 - Add support for creating GitHub Releases.
-
 
 ### Fixed
 

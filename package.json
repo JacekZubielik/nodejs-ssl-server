@@ -7,10 +7,11 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dist": "mkdir -p dist && cp app.js dist",
     "clean": "rm -rf dist"
+
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/saasscaleup/nodejs-ssl-server.git"
+    "url": "git+https://git@github.com:JacekZubielik/nodejs-ssl-server.git"
   },
   "keywords": [
     "nodejs",

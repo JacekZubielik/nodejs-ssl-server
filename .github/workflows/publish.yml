@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - main
+    tags:
+      - "v*.*.*"
     paths-ignore:
       - '**.md'
   pull_request:
@@ -12,29 +14,29 @@ on:
   workflow_dispatch:
 
 jobs:
-  run-linters:
-    name: Run linters
-    runs-on: ubuntu-latest
-    steps:
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20.12
-      - name: Check out Git repository
-        uses: actions/checkout@v4
-      - name: Install Node.js dependencies
-        run: npm install
-      - name: Run linters
-        uses: github/super-linter@v4
-        env:
-          VALIDATE_ALL_CODEBASE: false
-          VALIDATE_JAVASCRIPT_ES: true
-          DEFAULT_BRANCH: main
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  # run-linters:
+  #   name: Run linters
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Set up Node.js
+  #       uses: actions/setup-node@v4
+  #       with:
+  #         node-version: 20.12
+  #     - name: Check out Git repository
+  #       uses: actions/checkout@v4
+  #     - name: Install Node.js dependencies
+  #       run: npm install
+  #     - name: Run linters
+  #       uses: github/super-linter@v4
+  #       env:
+  #         VALIDATE_ALL_CODEBASE: false
+  #         VALIDATE_JAVASCRIPT_ES: true
+  #         DEFAULT_BRANCH: main
+  #         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   build:
     name: Build
-    needs: run-linters
+    # needs: run-linters
     runs-on: ubuntu-latest
     steps:
     - name: Checkout

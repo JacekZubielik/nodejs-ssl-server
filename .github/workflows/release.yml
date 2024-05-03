@@ -7,6 +7,7 @@ on:
   push:
     tags:
       - v[0-9]+.*
+
 jobs:
   super-linter:
     name: Super linter
@@ -27,6 +28,7 @@ jobs:
           VALIDATE_JAVASCRIPT_ES: true
           DEFAULT_BRANCH: main
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
   build:
     name: Build
     needs: super-linter
@@ -51,10 +53,11 @@ jobs:
       with:
         name: "app-${{ github.sha }}"
         path: dist/*.js
+
   create-release:
     name: Create release
     needs: build
-    runs-on: ubuntu-latest
+    runs-on: [ubuntu-latest]
     steps:
       - uses: actions/checkout@v4
       - uses: taiki-e/create-gh-release-action@v1
@@ -64,3 +67,17 @@ jobs:
           draft: false
           title: $version, $prefix
           branch: main
+
+  docker-build:
+    name: Docker image build
+    needs: create-release
+    runs-on: [ubuntu-latest]
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Login to docker hub
+        run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }} 
+      - name: Build docker image
+        run: docker build -t gorabbit/nodejs-ssl-server .
+      - name: Publish image to docker hub
+        run: docker push gorabbit/nodejs-ssl-server:latest

@@ -2,15 +2,12 @@ name: Release
 permissions:
   contents: write
 on:
-  # release:
-  #   types: [created]
   push:
     tags:
       - v[0-9]+.*
-
 jobs:
-  super-linter:
-    name: Super linter
+  linter:
+    name: Linter
     runs-on: ubuntu-latest
     steps:
       - name: Set up Node.js
@@ -24,7 +21,7 @@ jobs:
       - name: Install Node.js dependencies
         run: npm install
 
-      - name: Run Super linter
+      - name: Run linter
         uses: github/super-linter@v4
         env:
           VALIDATE_ALL_CODEBASE: false
@@ -34,7 +31,7 @@ jobs:
 
   build:
     name: Build
-    needs: [ super-linter ]
+    needs: [ linter ]
     runs-on: ubuntu-latest
     steps:
     - name: Checkout code
@@ -62,8 +59,8 @@ jobs:
         path: |
           dist/*.js
 
-  create-release:
-    name: Create release
+  release:
+    name: Release
     needs: [ build ]
     runs-on: ubuntu-latest
     steps:
@@ -78,18 +75,21 @@ jobs:
           branch: main
           allow-missing-changelog: true
 
-  build-docker:
-    name: Docker image build
-    needs: [ create-release ]
+  image:
+    name: Image
+    needs: [ release ]
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Login to docker hub
+      - name: Build and Push Container to ghcr.io
+        uses: GlueOps/github-actions-build-push-containers@v0.3.7
+
+      - name: Login to Docker Hub
         run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
 
-      - name: Build docker image
+      - name: Build Docker image
         run: docker build -t gorabbit/nodejs-ssl-server .
 
       - name: Publish image to docker hub

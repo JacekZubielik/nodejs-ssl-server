@@ -62,5 +62,5 @@ jobs:
           changelog: CHANGELOG.md
           token: ${{ secrets.GITHUB_TOKEN }}
           draft: false
-          title: $version
+          title: $version, $prefix
           branch: main

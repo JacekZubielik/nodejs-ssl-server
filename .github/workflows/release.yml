@@ -76,6 +76,7 @@ jobs:
           draft: false
           title: $version
           branch: main
+          allow-missing-changelog: true
 
   build-docker:
     name: Docker image build

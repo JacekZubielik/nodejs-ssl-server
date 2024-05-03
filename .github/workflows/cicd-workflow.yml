@@ -5,17 +5,33 @@ on:
     branches: [main]
 
 jobs:
-  build:
-    runs-on: [ubuntu-latest]
+  # build:
+  #   runs-on: [ubuntu-latest]
+  #   steps:
+  #     - name: Checkout code
+  #       uses: actions/checkout@v4
+  #     - name: Login to docker hub
+  #       run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }} 
+  #     - name: Build docker image
+  #       run: docker build -t gorabbit/nodejs-ssl-server .
+  #     - name: Publish image to docker hub
+  #       run: docker push gorabbit/nodejs-ssl-server:latest
+
+  dockerhub:
+    runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-      - name: Login to docker hub
-        run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }} 
-      - name: Build docker image
-        run: docker build -t gorabbit/nodejs-ssl-server .
-      - name: Publish image to docker hub
-        run: docker push gorabbit/nodejs-ssl-server:latest
+      - name: Build and Push Container to docker.io
+        uses: GlueOps/github-actions-build-push-containers@v0.3.7
+        with:
+          registry: "docker.io"
+          dockerhub_username: ${{ secrets.DOCKERHUB_USERNAME }}
+          dockerhub_password: ${{ secrets.DOCKERHUB_PASSWORD }}
+  ghcr:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Build and Push Container to ghcr.io
+        uses: GlueOps/github-actions-build-push-containers@v0.3.7
+
         
   # deploy:
   #   needs: build

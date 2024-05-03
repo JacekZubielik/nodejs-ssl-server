@@ -67,9 +67,7 @@ and this project adheres to [Semantic Versioning].
 
 - initial release
 
-<!-- Links -->
-[keep a changelog]: https://keepachangelog.com/en/1.0.0/
-[semantic versioning]: https://semver.org/spec/v2.0.0.html
+
 
 <!-- Versions -->
 [0.0.2]: https://github.com/JacekZubielik/nodejs-ssl-server/releases/tag/v0.0.2

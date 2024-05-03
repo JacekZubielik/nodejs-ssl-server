@@ -1,4 +1,4 @@
-name: Publish
+name: Linter
 permissions:
   contents: write
 on:

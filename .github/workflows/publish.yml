@@ -1,23 +1,16 @@
 name: Publish
-
 permissions:
   contents: write
-
 on:
   push:
     branches:
       - main
-    tags:
-      - "v*.*.*"
     paths-ignore:
       - '**.md'
   pull_request:
     paths-ignore:
       - '**.md'
   workflow_dispatch:
-
-
-
 jobs:
   # run-linters:
   #   name: Run linters
@@ -38,7 +31,6 @@ jobs:
   #         VALIDATE_JAVASCRIPT_ES: true
   #         DEFAULT_BRANCH: main
   #         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
   build:
     name: Build
     # needs: run-linters
@@ -63,8 +55,3 @@ jobs:
       with:
         name: "app-${{ github.sha }}"
         path: dist/*.js
-
-
-
-
-

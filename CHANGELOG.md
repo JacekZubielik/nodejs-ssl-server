@@ -5,12 +5,22 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog],
 and this project adheres to [Semantic Versioning].
 
+## [0.0.7] - 2024-05-03
+### Added
+
+- job **Run linters**
+- job Build needs job **Run linters**
+
+### Changed
+
+- node-version: **20.12**
+
 
 ## [0.0.6] - 2024-05-03
 
 ### Fixed
 
-- on release push branches OFF
+- on release push branches **OFF**
 
 
 ## [0.0.5] - 2024-05-03
@@ -18,7 +28,7 @@ and this project adheres to [Semantic Versioning].
 ### Fixed
 
 - node 20
-- npm cache ON
+- npm cache **ON**
 - job create-release needs job build
 
 ## [0.0.4] - 2024-05-03

@@ -5,27 +5,39 @@ on:
   # release:
   #   types: [created]
   push:
-    # branches:
-    #   - main
     tags:
       - v[0-9]+.*
-    paths-ignore:
-      - '**.md'
-  pull_request:
-    paths-ignore:
-      - '**.md'
 jobs:
+  run-linters:
+    name: Run linters
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20.12
+      - name: Check out Git repository
+        uses: actions/checkout@v4
+      - name: Install Node.js dependencies
+        run: npm install
+      - name: Run linters
+        uses: github/super-linter@v4
+        env:
+          VALIDATE_ALL_CODEBASE: false
+          VALIDATE_JAVASCRIPT_ES: true
+          DEFAULT_BRANCH: main
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   build:
     name: Build
-    # needs: run-linters
+    needs: run-linters
     runs-on: ubuntu-latest
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
-    - name: Setup Node 20
+    - name: Setup Node 20.12
       uses: actions/setup-node@v4
       with:
-        node-version: 20
+        node-version: 20.12
         cache: 'npm'
     - name: Install dependencies
       run: |
@@ -50,5 +62,5 @@ jobs:
           changelog: CHANGELOG.md
           token: ${{ secrets.GITHUB_TOKEN }}
           draft: false
-          title: $version, $tag
+          title: $version
           branch: main

@@ -1,9 +1,12 @@
 name: CICD
-
+permissions:
+  contents: write
 on:
   push:
     branches: [main]
-
+    paths-ignore:
+      - '**.md'
+  workflow_dispatch:
 jobs:
   # build:
   #   runs-on: [ubuntu-latest]
@@ -16,8 +19,8 @@ jobs:
   #       run: docker build -t gorabbit/nodejs-ssl-server .
   #     - name: Publish image to docker hub
   #       run: docker push gorabbit/nodejs-ssl-server:latest
-
   dockerhub:
+    name: DockerHub
     runs-on: ubuntu-latest
     steps:
       - name: Build and Push Container to docker.io
@@ -26,6 +29,7 @@ jobs:
           registry: "docker.io"
           dockerhub_username: ${{ secrets.DOCKER_USERNAME }}
           dockerhub_password: ${{ secrets.DOCKER_PASSWORD }}
+
   ghcr:
     runs-on: ubuntu-latest
     steps:

@@ -6,6 +6,7 @@ The format is based on [Keep a Changelog],
 and this project adheres to [Semantic Versioning].
 
 ## [0.0.10] - 2024-05-03
+
 ### Changed
 - CleanUP
 - Test Github actions build and push docker image

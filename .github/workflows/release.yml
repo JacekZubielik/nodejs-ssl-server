@@ -89,25 +89,3 @@ jobs:
           branch: main
           allow-missing-changelog: true
 
-  image:
-    name: Image
-    needs: [ release ]
-    runs-on: [ubuntu-latest]
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-
-      - name: Build and Push Container to ghcr.io
-        uses: GlueOps/github-actions-build-push-containers@v0.4.1
-
-      # - name: Login to Docker Hub
-      #   run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
-
-      # - name: Build Docker image
-      #   run: docker build -t gorabbit/nodejs-ssl-server .
-
-      # - name: Publish image to docker hub
-      #   run: docker push gorabbit/nodejs-ssl-server:latest

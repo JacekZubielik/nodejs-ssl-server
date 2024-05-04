@@ -1,11 +1,12 @@
-name: CI
+name: Image
 
 on:
   push:
     branches:
       - '*'
     tags:
-      - 'v*'
+      # - 'v*'
+      - v[0-9]+.*
   pull_request:
     branches: [main]
   workflow_dispatch:
@@ -33,9 +34,10 @@ jobs:
             type=ref,event=branch
             type=ref,event=pr
             type=semver,pattern={{version}}
-            type=semver,pattern={{major}}.{{minor}}
-            type=semver,pattern={{major}}
-            type=sha   
+            type=sha
+
+# type=semver,pattern={{major}}.{{minor}}
+# type=semver,pattern={{major}}
 
       - name: Login to DockerHub
         # if: github.event_name != 'pull_request'

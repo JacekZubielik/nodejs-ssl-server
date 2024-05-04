@@ -5,6 +5,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog],
 and this project adheres to [Semantic Versioning].
 
+## [0.1.2] - 2024-05-04
+
+### Changed
+- Super Linter updated to v6
+- Changed repo to super-linter/super-linter@v6.4.1
+
+### Removed
+- Steps: **Set up Node.js** and **Install Node.js dependencies**.
+
 ## [0.1.1] - 2024-05-03
 
 ### Changed

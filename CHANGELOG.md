@@ -9,7 +9,6 @@ and this project adheres to [Semantic Versioning].
 
 ### Changed
 - Super Linter updated to v6
-<!-- - Changed repo to super-linter/super-linter@v6.4.1 -->
 - Dockerfile: node:alpine3.19
 - Cleanup code.
   

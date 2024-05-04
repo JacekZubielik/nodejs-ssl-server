@@ -5,13 +5,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog],
 and this project adheres to [Semantic Versioning].
 
+## [0.1.3] - 2024-05-04
+### Changed
+- 
+
+
 ## [0.1.2] - 2024-05-04
 
 ### Changed
 - Super Linter updated to v6
 - Dockerfile: node:alpine3.19
 - Cleanup code.
-  
+
 ### Removed
 - Steps: **Set up Node.js** and **Install Node.js dependencies**.
 

@@ -11,19 +11,21 @@ jobs:
     name: Linter
     runs-on: ubuntu-latest
     steps:
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20.12
+      # - name: Set up Node.js
+      #   uses: actions/setup-node@v4
+      #   with:
+      #     node-version: 20.12
 
       - name: Checkout code
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
-      - name: Install Node.js dependencies
-        run: npm install
+      # - name: Install Node.js dependencies
+      #   run: npm install
 
-      - name: Run Super linter
-        uses: github/super-linter@v4
+      - name: Run linter
+        uses: github/super-linter@v6
         env:
           VALIDATE_ALL_CODEBASE: false
           VALIDATE_JAVASCRIPT_ES: true

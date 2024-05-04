@@ -1,7 +1,6 @@
 name: Publish
 permissions:
-  id-token: write
-  contents: read
+  contents: write
 on:
   push:
     branches: [main]
@@ -79,8 +78,8 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Build and Push Container to ghcr.io
-        uses: GlueOps/github-actions-build-push-containers@v0.4.1
+      # - name: Build and Push Container to ghcr.io
+      #   uses: GlueOps/github-actions-build-push-containers@v0.4.1
 
       # - name: Login to Docker Hub
       #   run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
@@ -91,3 +90,8 @@ jobs:
       # - name: Publish image to docker hub
       #   run: docker push gorabbit/nodejs-ssl-server:latest
 
+      - name: Build and publish a Docker image for ${{ github.repository }}
+        uses: macbre/push-to-ghcr@master
+        with:
+          image_name: ${{ github.repository }}  # it will be lowercased internally
+          github_token: ${{ secrets.GITHUB_TOKEN }}

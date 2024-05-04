@@ -4,6 +4,38 @@ permissions:
 on:
   workflow_dispatch:
 jobs:
+
+  build:
+    name: Build
+    runs-on: [ubuntu-latest]
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20.12
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: |
+          npm ci
+
+      - name: Compile
+        run: |
+          npm run clean && \
+          npm run dist
+
+      - name: Create artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: "app-${{ github.sha }}"
+          path: dist/*.js
+
   # build:
   #   runs-on: [ubuntu-latest]
   #   steps:
@@ -15,6 +47,7 @@ jobs:
   #       run: docker build -t gorabbit/nodejs-ssl-server .
   #     - name: Publish image to docker hub
   #       run: docker push gorabbit/nodejs-ssl-server:latest
+
   dockerhub:
     name: DockerHub
     runs-on: ubuntu-latest
@@ -43,3 +76,33 @@ jobs:
   #       run: docker rm -f nodejs-ssl-server
   #     - name: Run docker container
   #       run: docker run -d -p 5000:5000 --name nodejs-app-container gorabbit/nodejs-ssl-server
+
+  image:
+    name: Image
+    needs: [ build ]
+    runs-on: [ubuntu-latest]
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      # - name: Build and Push Container to ghcr.io
+      #   uses: GlueOps/github-actions-build-push-containers@v0.4.1
+
+      # - name: Login to Docker Hub
+      #   run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+
+      # - name: Build Docker image
+      #   run: docker build -t gorabbit/nodejs-ssl-server .
+
+      # - name: Publish image to docker hub
+      #   run: docker push gorabbit/nodejs-ssl-server:latest
+
+      - name: Build and publish Docker image tagged according to a git-tag
+        uses: VaultVulp/gp-docker-action@1.6.0
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          image-name: nodejs-ssl-server
+          extract-git-tag: true

@@ -103,9 +103,3 @@ jobs:
       # - name: Publish image to docker hub
       #   run: docker push gorabbit/nodejs-ssl-server:latest
 
-      - name: Build and publish Docker image tagged according to a git-tag
-        uses: VaultVulp/gp-docker-action@1.6.0
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          image-name: nodejs-ssl-server
-          extract-git-tag: true

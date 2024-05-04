@@ -5,24 +5,31 @@ on:
   push:
     tags:
       - v[0-9]+.*
+  workflow_dispatch:
+
 jobs:
   linter:
     name: Linter
-    runs-on: ubuntu-latest
+    runs-on: [ubuntu-latest]
+
     steps:
-      - name: Set up Node.js
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node 20
         uses: actions/setup-node@v4
         with:
           node-version: 20.12
+          cache: 'npm'
 
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Install Node.js dependencies
-        run: npm install
+      - name: Install dependencies
+        run: |
+          npm install
 
       - name: Run linter
-        uses: github/super-linter@v4
+        uses: github/super-linter@v6
         env:
           VALIDATE_ALL_CODEBASE: false
           VALIDATE_JAVASCRIPT_ES: true
@@ -32,39 +39,46 @@ jobs:
   build:
     name: Build
     needs: [ linter ]
-    runs-on: ubuntu-latest
+    runs-on: [ubuntu-latest]
+
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
-    - name: Setup Node 20.12
-      uses: actions/setup-node@v4
-      with:
-        node-version: 20.12
-        cache: 'npm'
+      - name: Setup Node 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20.12
+          cache: 'npm'
 
-    - name: Install dependencies
-      run: |
-        npm ci
+      - name: Install dependencies
+        run: |
+          npm ci
 
-    - name: Compile
-      run: |
-        npm run clean && \
-        npm run dist
+      - name: Compile
+        run: |
+          npm run clean && \
+          npm run dist
 
-    - name: Create artifact
-      uses: actions/upload-artifact@v4
-      with:
-        name: "app-${{ github.sha }}"
-        path: |
-          dist/*.js
+      - name: Create artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: "app-${{ github.sha }}"
+          path: |
+            dist/*.js
 
   release:
     name: Release
     needs: [ build ]
-    runs-on: ubuntu-latest
+    runs-on: [ubuntu-latest]
+
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - uses: taiki-e/create-gh-release-action@v1.8.2
         with:
@@ -78,19 +92,22 @@ jobs:
   image:
     name: Image
     needs: [ release ]
-    runs-on: ubuntu-latest
+    runs-on: [ubuntu-latest]
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Build and Push Container to ghcr.io
         uses: GlueOps/github-actions-build-push-containers@v0.4.1
 
-      - name: Login to Docker Hub
-        run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+      # - name: Login to Docker Hub
+      #   run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
 
-      - name: Build Docker image
-        run: docker build -t gorabbit/nodejs-ssl-server .
+      # - name: Build Docker image
+      #   run: docker build -t gorabbit/nodejs-ssl-server .
 
-      - name: Publish image to docker hub
-        run: docker push gorabbit/nodejs-ssl-server:latest
+      # - name: Publish image to docker hub
+      #   run: docker push gorabbit/nodejs-ssl-server:latest

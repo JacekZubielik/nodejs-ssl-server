@@ -21,14 +21,14 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Set up Node.js
+      - name: Setup Node 20
         uses: actions/setup-node@v4
         with:
           node-version: 20.12
+          cache: 'npm'
 
       - name: Install dependencies
         run: |
-          echo "Running installing dependencies..."
           npm install
 
       - name: Lint code

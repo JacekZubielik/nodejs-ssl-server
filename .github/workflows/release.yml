@@ -11,37 +11,37 @@ permissions:
   packages: write
 
 jobs:
-  # linter:
-  #   name: Linter
-  #   runs-on: [ubuntu-latest]
+  linter:
+    name: Linter
+    runs-on: [ubuntu-latest]
 
-  #   steps:
-  #     - name: Checkout code
-  #       uses: actions/checkout@v4
-  #       with:
-  #         fetch-depth: 0
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
-  #     - name: Setup Node 20
-  #       uses: actions/setup-node@v4
-  #       with:
-  #         node-version: 20.12
-  #         cache: 'npm'
+      - name: Setup Node 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20.12
+          cache: 'npm'
 
-  #     - name: Install dependencies
-  #       run: |
-  #         npm install
+      - name: Install dependencies
+        run: |
+          npm install
 
-  #     - name: Run linter
-  #       uses: github/super-linter@v6
-  #       env:
-  #         VALIDATE_ALL_CODEBASE: false
-  #         VALIDATE_JAVASCRIPT_ES: true
-  #         DEFAULT_BRANCH: main
-  #         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Run linter
+        uses: github/super-linter@v6
+        env:
+          VALIDATE_ALL_CODEBASE: false
+          VALIDATE_JAVASCRIPT_ES: true
+          DEFAULT_BRANCH: main
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   build:
     name: Build
-    # needs: [ linter ]
+    needs: [ linter ]
     runs-on: [ubuntu-latest]
 
     steps:
@@ -93,6 +93,8 @@ jobs:
           allow-missing-changelog: true
 
   image:
+    needs: [ release ]
+
     runs-on: [ubuntu-latest]
     steps:
       - name: Checkout
@@ -111,9 +113,6 @@ jobs:
             type=ref,event=pr
             type=semver,pattern={{version}}
             type=sha
-
-# type=semver,pattern={{major}}.{{minor}}
-# type=semver,pattern={{major}}
 
       - name: Login to DockerHub
         # if: github.event_name != 'pull_request'

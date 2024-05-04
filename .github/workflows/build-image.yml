@@ -14,10 +14,15 @@ permissions:
   contents: read
 
 jobs:
-  docker:
+  # docker:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: GHCR-Action
+  #       uses: KuhlTime/ghcr-action@v2
+  #       with:
+  #         token: ${{ secrets.GITHUB_TOKEN }}
+  ghcr:
     runs-on: ubuntu-latest
     steps:
-      - name: GHCR-Action
-        uses: KuhlTime/ghcr-action@v2
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Build and Push Container to ghcr.io
+        uses: GlueOps/github-actions-build-push-containers@v0.4.1

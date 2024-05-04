@@ -70,7 +70,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Build and Push Container to ghcr.io
-        uses: GlueOps/github-actions-build-push-containers@v0.3.7
+        uses: GlueOps/github-actions-build-push-containers@v0.4.1
 
       - name: Login to Docker Hub
         run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}

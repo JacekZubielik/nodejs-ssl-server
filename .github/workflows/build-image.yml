@@ -27,8 +27,8 @@ jobs:
         uses: docker/metadata-action@v5
         with:
           images: |
-            name/app
-            ghcr.io/username/app 
+            gorabbit/nodejs-ssl-server
+            ghcr.io/jacekzubielik/nodejs-ssl-serverp 
           tags: |
             type=schedule
             type=ref,event=branch

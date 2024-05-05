@@ -122,6 +122,8 @@ jobs:
       - name: Release
         uses: softprops/action-gh-release@v2
         if: startsWith(github.ref, 'refs/tags/v')
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           name: ${{ github.ref_name }}
           tag_name: ${{ needs.create_release.outputs.tag-name }}
@@ -129,12 +131,9 @@ jobs:
           draft: false
           prerelease: false
           generate_release_notes: true
-
-          files: |
-            release.zip
-            dist/**
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # files: |
+          #   release.zip
+          #   dist/**
 
   image:
     needs: [ release ]

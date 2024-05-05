@@ -9,7 +9,6 @@ on:
 
   push:
     tags:
-      # - v[0-9]+.*
       - "v*.*.*"
     paths-ignore:
       - 'CONTRIBUTING.md'
@@ -119,6 +118,12 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Fetch version
+        run: |
+          VERSION=$(echo "${GITHUB_HEAD_REF}" | sed "s/release\\/v//")
+          echo "version=${VERSION}" >> $GITHUB_OUTPUT
+        id: fetch-version
+
       - name: Release
         uses: softprops/action-gh-release@v2
         if: startsWith(github.ref, 'refs/tags/v')
@@ -126,14 +131,15 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           name: ${{ github.ref_name }}
-          tag_name: ${{ needs.create_release.outputs.tag-name }}
-          files: release_${{ matrix.release_suffix }}
+          tag_name: v${{ steps.fetch-version.outputs.version }}
+          # tag_name: ${{ needs.create_release.outputs.tag-name }}
+          #files: release_${{ matrix.release_suffix }}
           draft: false
           prerelease: false
           generate_release_notes: true
-          # files: |
-          #   release.zip
-          #   dist/**
+          files: |
+            release.zip
+            dist/**
 
   image:
     needs: [ release ]

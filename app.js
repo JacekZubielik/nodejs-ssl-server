@@ -13,9 +13,9 @@ app.get('/', (req, res) => {
                             <img src="https://picsum.photos/400/400?random=1">
                         </div>
                     </body>
-                   </html>`);
- 
-  console.log(`[Version ${version}]: New request => http://${hostname}:${port}`+req.url);
+                    </html>`);
+
+    console.log(`[Version ${version}]: New request => http://${hostname}:${port}`+req.url);
 
 })
 

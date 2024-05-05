@@ -1,15 +1,26 @@
 name: Release
 
 on:
+  pull_request:
+    branches:
+    - "main"
+    types:
+    - closed
+
   push:
     tags:
       # - v[0-9]+.*
       - "v*.*.*"
+    paths-ignore:
+      - 'CONTRIBUTING.md'
+      - 'README.md'
+      - 'docs/**'
   workflow_dispatch:
 
 permissions:
   contents: write
   packages: write
+  discussions: write
 
 jobs:
   linter:
@@ -73,6 +84,10 @@ jobs:
           path: |
             dist/*.js
 
+      - name: Create release zip
+        run: zip -r release.zip .
+        if: success()
+
   # release:
   #   name: Release
   #   needs: [ build ]
@@ -106,7 +121,20 @@ jobs:
 
       - name: Release
         uses: softprops/action-gh-release@v2
-      # if: startsWith(github.ref, 'refs/tags/')
+        if: startsWith(github.ref, 'refs/tags/v')
+        with:
+          name: ${{ github.ref_name }}
+          tag_name: ${{ needs.create_release.outputs.tag-name }}
+          files: release_${{ matrix.release_suffix }}
+          draft: false
+          prerelease: false
+          generate_release_notes: true
+
+          files: |
+            release.zip
+            dist/**
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   image:
     needs: [ release ]

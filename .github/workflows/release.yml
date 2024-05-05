@@ -150,12 +150,12 @@ jobs:
             gorabbit/nodejs-ssl-server
             ghcr.io/jacekzubielik/nodejs-ssl-server
             ${{ env.REGISTRY_IMAGE }}
-          tags: |
-            type=schedule
-            type=ref,event=branch
-            type=ref,event=pr
-            type=semver,pattern={{version}}
-            type=sha
+          # tags: |
+          #   type=schedule
+          #   type=ref,event=branch
+          #   type=ref,event=pr
+          #   type=semver,pattern={{version}}
+          #   type=sha
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3

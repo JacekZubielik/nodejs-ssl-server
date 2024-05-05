@@ -2,8 +2,7 @@ FROM node:alpine3.19
 
 LABEL image.authors="JacekZubielik" \
       title="nodejs-ssl-server" \
-      description="nodejs-ssl-server" \
-      licenses="GNU GPL" \
+      image.description="nodejs-ssl-server" \
       image.source="https://github.com/jacekzubielik/nodejs-ssl-server" \
       maintainer="JacekZubielik"
 

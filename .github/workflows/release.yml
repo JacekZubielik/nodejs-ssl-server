@@ -86,6 +86,7 @@ jobs:
           name: "app-${{ github.sha }}"
           path: |
             dist/*.js
+            release.zip
 
   release:
     name: Release

@@ -149,6 +149,7 @@ jobs:
           images: |
             gorabbit/nodejs-ssl-server
             ghcr.io/jacekzubielik/nodejs-ssl-server
+            ${{ env.REGISTRY_IMAGE }}
           tags: |
             type=schedule
             type=ref,event=branch

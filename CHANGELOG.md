@@ -5,6 +5,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog],
 and this project adheres to [Semantic Versioning].
 
+## [0.1.6] - 2024-05-05
+### Changed
+- New action-gh-release in place of the old one.
+- The parameterisation of the release action.
+
 ## [0.1.5] - 2024-05-04
 ### Changed
 - test only

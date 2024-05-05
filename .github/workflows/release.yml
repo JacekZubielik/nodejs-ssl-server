@@ -76,16 +76,16 @@ jobs:
           npm run clean && \
           npm run dist
 
+      - name: Create release zip
+        run: zip -r release.zip .
+        if: success()
+
       - name: Create artifact
         uses: actions/upload-artifact@v4
         with:
           name: "app-${{ github.sha }}"
           path: |
             dist/*.js
-
-      - name: Create release zip
-        run: zip -r release.zip .
-        if: success()
 
   release:
     name: Release
@@ -111,8 +111,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           name: ${{ github.ref_name }}
-          tag_name: v${{ steps.fetch-version.outputs.version }}
-          #tag_name: ${{ needs.create_release.outputs.tag-name }}
+          # tag_name: v${{ steps.fetch-version.outputs.version }}
+          tag_name: ${{ needs.create_release.outputs.tag-name }}
           files: |
             release_${{ matrix.release_suffix }}
             dist/**

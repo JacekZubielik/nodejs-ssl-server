@@ -3,7 +3,7 @@ const app = express();
 const hostname = '127.0.0.1';
 const port = 3000;
 
-const version = '0.1.7';
+const version = '0.1.8';
 
 app.get('/', (req, res) => {
         res.send(`<html>
@@ -13,9 +13,9 @@ app.get('/', (req, res) => {
                             <img src="https://picsum.photos/400/400?random=1">
                         </div>
                     </body>
-                   </html>`);
- 
-  console.log(`[Version ${version}]: New request => http://${hostname}:${port}`+req.url);
+                    </html>`);
+
+    console.log(`[Version ${version}]: New request => http://${hostname}:${port}`+req.url);
 
 })
 

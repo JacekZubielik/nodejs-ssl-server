@@ -1,11 +1,8 @@
 FROM node:alpine3.19
 
-LABEL image.authors="JacekZubielik" \
-      title="nodejs-ssl-server" \
-      description="nodejs-ssl-server" \
-      licenses="GNU GPL" \
-      image.source="https://github.com/jacekzubielik/nodejs-ssl-server" \
-      maintainer="JacekZubielik"
+LABEL org.opencontainers.image.authors="JacekZubielik" \
+      org.opencontainers.image.description="nodejs-ssl-server" \
+      org.opencontainers.image.source="https://github.com/jacekzubielik/nodejs-ssl-server"
 
 WORKDIR /app
 COPY package.json ./

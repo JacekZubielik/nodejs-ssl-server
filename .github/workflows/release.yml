@@ -72,8 +72,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           name: ${{ github.ref_name }}
-          # tag_name: v${{ steps.fetch-version.outputs.version }}
-          tag_name: ${{ needs.create_release.outputs.tag-name }}
+          tag_name: v${{ steps.fetch-version.outputs.version }}
+          #tag_name: ${{ needs.create_release.outputs.tag-name }}
           files: |
             release_${{ matrix.release_suffix }}
             LICENCE
@@ -110,7 +110,6 @@ jobs:
           images: |
             gorabbit/nodejs-ssl-server
             ghcr.io/jacekzubielik/nodejs-ssl-server
-          # ${{ env.REGISTRY_IMAGE }}
           tags: |
             type=schedule
             type=ref,event=branch
@@ -151,7 +150,7 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: .
-          #tags: ${{ steps.meta.outputs.tags }}
+          tags: ${{ steps.meta.outputs.tags }}
           #push: true
           platforms: ${{ matrix.platform }}
           labels: ${{ steps.meta.outputs.labels }}

@@ -71,11 +71,11 @@ jobs:
         with:
           fetch-depth: 0
 
-      # - name: Fetch version
-      #   run: |
-      #     VERSION=$(echo "${GITHUB_HEAD_REF}" | sed "s/release\\/v//")
-      #     echo "version=${VERSION}" >> $GITHUB_OUTPUT
-      #   id: fetch-version
+      - name: Fetch version
+        run: |
+          VERSION=$(echo "${GITHUB_HEAD_REF}" | sed "s/release\\/v//")
+          echo "version=${VERSION}" >> $GITHUB_OUTPUT
+        id: fetch-version
 
       - name: Generate release notes
         uses: softprops/action-gh-release@v2

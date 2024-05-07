@@ -53,13 +53,13 @@ jobs:
         run: zip -r release.zip .
         if: success()
 
-      - name: Create artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: "app-${{ github.sha }}"
-          path: |
-            dist/*.js
-            release.zip
+      # - name: Create artifact
+      #   uses: actions/upload-artifact@v4
+      #   with:
+      #     name: "app-${{ github.sha }}"
+      #     path: |
+      #       dist/*.js
+      #       release.zip
 
   # release:
   #   name: Release

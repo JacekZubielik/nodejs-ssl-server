@@ -58,11 +58,11 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Fetch version
-        run: |
-          VERSION=$(echo "${GITHUB_HEAD_REF}" | sed "s/release\\/v//")
-          echo "version=${VERSION}" >> $GITHUB_OUTPUT
-        id: fetch-version
+      # - name: Fetch version
+      #   run: |
+      #     VERSION=$(echo "${GITHUB_HEAD_REF}" | sed "s/release\\/v//")
+      #     echo "version=${VERSION}" >> $GITHUB_OUTPUT
+      #   id: fetch-version
 
       - name: Generate release notes
         uses: softprops/action-gh-release@v2
@@ -71,8 +71,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           name: ${{ github.ref_name }}
-          tag_name: v${{ steps.fetch-version.outputs.version }}
-          #tag_name: ${{ needs.create_release.outputs.tag-name }}
+# tag_name: v${{ steps.fetch-version.outputs.version }}
+          tag_name: ${{ needs.create_release.outputs.tag-name }}
           files: |
             release_${{ matrix.release_suffix }}
             LICENCE

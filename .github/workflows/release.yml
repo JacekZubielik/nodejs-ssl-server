@@ -74,7 +74,7 @@ jobs:
           tag_name: ${{ needs.create_release.outputs.tag-name }}
           files: |
             release_${{ matrix.release_suffix }}
-            LICENCE
+            LICENSE
           draft: false
           prerelease: false
           generate_release_notes: true

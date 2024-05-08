@@ -23,15 +23,15 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Setup Node 20
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20.12
-          cache: 'npm'
+      # - name: Setup Node 20
+      #   uses: actions/setup-node@v4
+      #   with:
+      #     node-version: 20.12
+      #     cache: 'npm'
 
-      - name: Install dependencies
-        run: |
-          npm install
+      # - name: Install dependencies
+      #   run: |
+      #     npm install
 
       - name: Lint code
         uses: github/super-linter@v6

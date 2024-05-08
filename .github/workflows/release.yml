@@ -146,7 +146,8 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
           platforms: ${{ matrix.platform }}
           labels: ${{ steps.meta.outputs.labels }}
-          push: ${{ github.event_name != 'pull_request' }}
+          push: true 
+        # ${{ github.event_name != 'pull_request' }}
           outputs: |
               type=image,name=target,annotation-index.org.opencontainers.image.description=${{ fromJSON(steps.meta.outputs.json).labels['org.opencontainers.image.description'] }},annotation-index.org.opencontainers.image.source=${{ fromJSON(steps.meta.outputs.json).labels['org.opencontainers.image.source'] }},annotation-index.org.opencontainers.image.licenses=${{ fromJSON(steps.meta.outputs.json).labels['org.opencontainers.image.licenses'] }}
               type=image,name=target,annotation-index.org.opencontainers.image.description=${{ fromJSON(steps.meta.outputs.json).labels['org.opencontainers.image.description'] }},annotation-index.org.opencontainers.image.source=${{ fromJSON(steps.meta.outputs.json).labels['org.opencontainers.image.source'] }},annotation-index.org.opencontainers.image.licenses=${{ fromJSON(steps.meta.outputs.json).labels['org.opencontainers.image.licenses'] }}

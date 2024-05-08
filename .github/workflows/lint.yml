@@ -2,8 +2,8 @@
 name: Linter
 
 on:
-  # push:
-  #   branches-ignore: [main]
+  push:
+    branches-ignore: [main]
   pull_request:
     branches: [main]
     paths-ignore:

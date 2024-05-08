@@ -74,7 +74,7 @@ jobs:
           tag_name: ${{ needs.create_release.outputs.tag-name }}
           files: |
             release_${{ matrix.release_suffix }}
-            LICENCE
+            LICENSE
           draft: false
           prerelease: false
           generate_release_notes: true
@@ -153,7 +153,7 @@ jobs:
           labels: ${{ steps.meta.outputs.labels }}
           push: ${{ github.event_name != 'pull_request' }}
           outputs: |
-              type=image,name=target,annotation-index.org.opencontainers.image.description=${{ fromJSON(steps.meta.outputs.json).labels['org.opencontainers.image.description'] }},annotation-index.org.opencontainers.image.source=${{ fromJSON(steps.meta.outputs.json).labels['org.opencontainers.image.source'] }},annotation-index.org.opencontainers.image.licenses=${{ fromJSON(steps.meta.outputs.json).labels['org.opencontainers.image.licenses'] }}
+              # type=image,name=target,annotation-index.org.opencontainers.image.description=${{ fromJSON(steps.meta.outputs.json).labels['org.opencontainers.image.description'] }},annotation-index.org.opencontainers.image.source=${{ fromJSON(steps.meta.outputs.json).labels['org.opencontainers.image.source'] }},annotation-index.org.opencontainers.image.licenses=${{ fromJSON(steps.meta.outputs.json).labels['org.opencontainers.image.licenses'] }}
 
       - name: Docker Hub Description
         uses: peter-evans/dockerhub-description@v4

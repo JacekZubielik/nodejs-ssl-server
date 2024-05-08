@@ -89,24 +89,10 @@ jobs:
   image:
     needs: [release]
     runs-on: [ubuntu-latest]
-    strategy:
-      fail-fast: false
-      matrix:
-        platform:
-          - linux/amd64
-          - linux/arm64
 
     steps:
-      - name: Prepare
-        run: |
-          platform=${{ matrix.platform }}
-          echo "PLATFORM_PAIR=${platform//\//-}" >> $GITHUB_ENV          
-
       - name: Checkout
         uses: actions/checkout@v4
-
-      - name: Set up QEMU
-        uses: docker/setup-qemu-action@v3
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
@@ -116,7 +102,6 @@ jobs:
         uses: docker/metadata-action@v5
         with:
           images: |
-            gorabbit/nodejs-ssl-server
             ghcr.io/jacekzubielik/nodejs-ssl-server
           tags: |
             type=ref,event=branch
@@ -144,13 +129,11 @@ jobs:
         with:
           context: .
           tags: ${{ steps.meta.outputs.tags }}
-          platforms: ${{ matrix.platform }}
+          platforms: arm64,amd64
           labels: ${{ steps.meta.outputs.labels }}
-          push: true 
-        # ${{ github.event_name != 'pull_request' }}
+          push: ${{ github.event_name != 'pull_request' }}
           outputs: |
-              type=image,name=target,annotation-index.org.opencontainers.image.description=${{ fromJSON(steps.meta.outputs.json).labels['org.opencontainers.image.description'] }},annotation-index.org.opencontainers.image.source=${{ fromJSON(steps.meta.outputs.json).labels['org.opencontainers.image.source'] }},annotation-index.org.opencontainers.image.licenses=${{ fromJSON(steps.meta.outputs.json).labels['org.opencontainers.image.licenses'] }}
-              type=image,name=target,annotation-index.org.opencontainers.image.description=${{ fromJSON(steps.meta.outputs.json).labels['org.opencontainers.image.description'] }},annotation-index.org.opencontainers.image.source=${{ fromJSON(steps.meta.outputs.json).labels['org.opencontainers.image.source'] }},annotation-index.org.opencontainers.image.licenses=${{ fromJSON(steps.meta.outputs.json).labels['org.opencontainers.image.licenses'] }}
+            type=image,name=target,annotation-index.org.opencontainers.image.description=${{ fromJSON(steps.meta.outputs.json).labels['org.opencontainers.image.description'] }},annotation-index.org.opencontainers.image.source=${{ fromJSON(steps.meta.outputs.json).labels['org.opencontainers.image.source'] }},annotation-index.org.opencontainers.image.licenses=${{ fromJSON(steps.meta.outputs.json).labels['org.opencontainers.image.licenses'] }}
 
       - name: Docker Hub Description
         uses: peter-evans/dockerhub-description@v4

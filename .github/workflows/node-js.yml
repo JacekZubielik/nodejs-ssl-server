@@ -2,8 +2,8 @@
 name: Node CI
 
 on:
-  push:
-    branches: [main,issue-*,dev-*]
+  # push:
+  #   branches: [main,issue-*,dev-*]
   pull_request:
     branches: [main]
     types:
@@ -39,8 +39,8 @@ jobs:
           npm run clean && \
           npm run dist
 
-      - name: Build
-        run: npm run build --if-present
+      # - name: Build
+      #   run: npm run build --if-present
 
       - name: Test
         run: npm test

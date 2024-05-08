@@ -43,7 +43,7 @@
     "branches": [
       "main"
     ],
-    "repositoryUrl": "https://github.com/your_user/your_repository.git",
+    "repositoryUrl": "https://github.com/JacekZubielik/nodejs-ssl-server.git",
     "plugins": [
       "@semantic-release/commit-analyzer",
       "@semantic-release/release-notes-generator",

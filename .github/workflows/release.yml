@@ -33,7 +33,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           name: ${{ github.ref_name }}
-          # tag_name: ${{ needs.create_release.outputs.tag-name }}
+          tag_name: ${{ needs.create_release.outputs.tag-name }}
           files: |
             LICENSE
             Release.txt

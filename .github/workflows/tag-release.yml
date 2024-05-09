@@ -2,6 +2,11 @@ name: Tag Release
 on:
   workflow_dispatch:
 
+permissions:
+  contents: write
+  packages: write
+  discussions: write
+
 jobs:
   generate_release:
     name: Release

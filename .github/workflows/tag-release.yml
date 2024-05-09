@@ -6,6 +6,21 @@ permissions:
   contents: write
 
 jobs:
+  create_release:
+    name: Create Release
+    runs-on: [ubuntu-latest]
+    steps:
+
+
+    - name: Create Release
+      id: create_release
+      uses: softprops/action-gh-release@v2
+      with:
+        name: ${{ github.ref_name }}
+        draft: false
+        prerelease: false
+        generate_release_notes: true
+
   generate_release:
     name: Release
     runs-on: [ubuntu-latest]
@@ -22,4 +37,3 @@ jobs:
           tag_name: ${{ needs.create_release.outputs.tag-name }}
           body_path: ".github/RELEASE-TEMPLATE.md"
           token: ${{ secrets.GITHUB_TOKEN }}
-          generate_release_notes: true

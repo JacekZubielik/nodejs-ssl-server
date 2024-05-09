@@ -6,8 +6,6 @@ on:
 
 permissions:
   contents: write
-  packages: write
-  discussions: write
 
 jobs:
   release:
@@ -19,11 +17,11 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Build Release.txt
-        run: echo ${{ github.sha }} > Release.txt
+      # - name: Build Release.txt
+      #   run: echo ${{ github.sha }} > Release.txt
 
-      - name: Test Release.txt
-        run: cat Release.txt
+      # - name: Test Release.txt
+      #   run: cat Release.txt
 
       - name: Generate Changelog
         run: echo "# Changelog" > ${{ github.workspace }}-CHANGELOG.md

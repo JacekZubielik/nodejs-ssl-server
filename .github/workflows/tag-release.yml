@@ -23,7 +23,7 @@ jobs:
         id: fetch-version
 
       - name: Generate release notes
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v2
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           tag_name: v${{ steps.fetch-version.outputs.version }}

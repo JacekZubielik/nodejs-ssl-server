@@ -19,5 +19,6 @@ jobs:
         uses: softprops/action-gh-release@v2
         if: startsWith(github.ref, 'refs/tags/')
         with:
+          body_path: ".github/RELEASE-TEMPLATE.md"
           token: ${{ secrets.GITHUB_TOKEN }}
           generate_release_notes: true

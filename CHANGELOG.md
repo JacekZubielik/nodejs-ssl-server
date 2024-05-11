@@ -1,9 +1,8 @@
 # Changelog
 
-All notable changes to this project will be documented in this file.
+All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
-The format is based on [Keep a Changelog],
-and this project adheres to [Semantic Versioning].
+### [0.4.1](https://github.com/JacekZubielik/nodejs-ssl-server/compare/v0.4.2...v0.4.1) (2024-05-11)
 
 ## [0.3.1] - 2024-05-08
 ### Changed
@@ -117,4 +116,3 @@ and this project adheres to [Semantic Versioning].
 <!-- Versions -->
 [0.0.2]: https://github.com/JacekZubielik/nodejs-ssl-server/releases/tag/v0.0.2
 [0.0.1]: https://github.com/JacekZubielik/nodejs-ssl-server/releases/tag/v0.0.1
-
